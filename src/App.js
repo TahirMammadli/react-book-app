@@ -8,6 +8,7 @@ function App() {
   const [editedBook, setEditedBook] = useState()
   const [booksArr, setBooksArr] = useState([])
   let updatedBooksArr = [...booksArr];
+  let updatedBook;
   function addBookHandler(book){
     updatedBooksArr = setBooksArr(booksArr.concat(book))
   }
@@ -19,6 +20,7 @@ function App() {
     setIsOpen(true);
     setIsEditMode(true);
     setEditedBook(book)
+
   }
   console.log(editedBook)
  function openModalHandler(){
@@ -27,10 +29,20 @@ function App() {
  function closeModalHandler(){
    setIsOpen(false)
  }
+function editBookContentHandler(editableBook){
+ 
+    const existingBookIndex = booksArr.findIndex(
+      (book) => book.id === editableBook.bookId
+    );
+    const existingBook = booksArr[existingBookIndex];
+    updatedBook = {...existingBook, title: editableBook.updatedTitle, author: editableBook.updatedAuthor, isbn: editableBook.updatedIsbn}
+    booksArr[existingBookIndex] = updatedBook;
+  
 
+}
   return (
    <div>
-     {isOpen && <AddBook book={editedBook} isEditMode={isEditMode} onAddBook={addBookHandler} onCloseModal={closeModalHandler}/>} 
+     {isOpen && <AddBook book={editedBook} onEditBook={editBookContentHandler} isEditMode={isEditMode} onAddBook={addBookHandler} onCloseModal={closeModalHandler}/>} 
 
     
      <Header onOpenModal={openModalHandler}/>

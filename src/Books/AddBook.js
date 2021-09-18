@@ -13,25 +13,34 @@ const AddBook = (props) => {
   let bookTitle;
   let bookAuthor;
   let bookIsbn;
+  let bookId;
 
   if (isEditMode) {
     bookTitle = props.book.title;
     bookAuthor = props.book.author;
     bookIsbn = props.book.isbn;
+    bookId = props.book.id;
   }
-  
-
   function addABook(event) {
     event.preventDefault();
     const enteredTitleRef = titleRef.current.value;
     const enteredAuthorRef = authorRef.current.value;
     const enteredIsbnRef = isbnRef.current.value;
-    props.onAddBook({
-      id: Math.floor(Math.random() * 10),
-      title: enteredTitleRef,
-      author: enteredAuthorRef,
-      isbn: enteredIsbnRef,
-    });
+    if (isEditMode) {
+      props.onEditBook({
+        bookId: bookId,
+        updatedTitle: enteredTitleRef,
+        updatedAuthor: enteredAuthorRef,
+        updatedIsbn: enteredIsbnRef,
+      });
+    } else {
+      props.onAddBook({
+        id: Math.floor(Math.random() * 10),
+        title: enteredTitleRef,
+        author: enteredAuthorRef,
+        isbn: enteredIsbnRef,
+      });
+    }
   }
   return (
     <Modal onCloseModal={props.onCloseModal}>
@@ -40,31 +49,37 @@ const AddBook = (props) => {
           <Input
             ref={titleRef}
             label={"Title"}
-            input={{ type: "text", value: "{bookTitle}" }}
+            input={{ type: "text", defaultValue: bookTitle }}
           />
         ) : (
           <Input ref={titleRef} label={"Title"} input={{ type: "text" }} />
         )}
 
-        {isEditMode && (
+        {isEditMode ? (
           <Input
             ref={authorRef}
             label={"Author"}
-            input={{ type: "text", value: { bookAuthor } }}
+            input={{ type: "text", defaultValue: bookAuthor }}
           />
+        ) : (
+          <Input ref={authorRef} label={"Author"} input={{ type: "text" }} />
         )}
-        <Input ref={authorRef} label={"Author"} input={{ type: "text" }} />
 
-        {isEditMode && (
+        {isEditMode ? (
           <Input
             ref={isbnRef}
             label={"ISBN"}
-            input={{ type: "text", value: { bookIsbn } }}
+            input={{ type: "text", defaultValue: bookIsbn }}
           />
+        ) : (
+          <Input ref={isbnRef} label={"ISBN"} input={{ type: "text" }} />
         )}
-        <Input ref={isbnRef} label={"ISBN"} input={{ type: "text" }} />
 
-        <button>Add a Book</button>
+        {isEditMode ? (
+          <button>Edit</button>
+        ) : (
+          <button>Add a Book</button>
+        )}
         <button onClick={props.onCloseModal}>Close</button>
       </form>
     </Modal>
