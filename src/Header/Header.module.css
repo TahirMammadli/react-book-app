@@ -1,0 +1,23 @@
+h1{
+    color: white;
+    margin: 2rem;
+    font-size: 3rem;
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+   
+}
+
+.add-a-book{
+    color: white;
+    cursor: pointer;
+    margin-right: 4rem;
+    font-size: 1.5rem;
+}
+
+
+.add-a-book:hover{
+    color: rgb(241, 239, 239);
+}
