@@ -8,3 +8,33 @@
     width: 50rem;
     
 }
+.message-flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+h1{
+    color: black;
+    text-align: center;
+}
+
+.message{
+    background-color: lightgreen;
+    padding: 0.7rem;
+    color: white;
+    border: 2px green solid;
+    border-radius: 1rem;
+    width: 8rem;
+    text-align: center;
+    height: 1.5rem;
+    font-size: large;
+    font-weight: bold;
+}
+
+ul{
+    list-style: none;
+    border: 1px solid black;
+    border-radius: 0.5rem;
+    position: relative;
+    height: 10rem;
+}

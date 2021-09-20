@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import Card from "../UI/Card";
 import Input from "../UI/Input";
-import styles from "./AddBook.module.css";
+import styles from "./AddBookForm.module.css";
 import Modal from "../Modal/Modal";
 
 const AddBook = (props) => {
@@ -74,13 +74,14 @@ const AddBook = (props) => {
         ) : (
           <Input ref={isbnRef} label={"ISBN"} input={{ type: "text" }} />
         )}
-
+      <div className={styles.button}>
         {isEditMode ? (
           <button>Edit</button>
         ) : (
           <button>Add a Book</button>
         )}
         <button onClick={props.onCloseModal}>Close</button>
+        </div>
       </form>
     </Modal>
   );

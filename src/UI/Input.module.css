@@ -1,0 +1,27 @@
+.input{
+    display: grid;
+    grid-template-columns: 3rem 30rem;
+
+}
+
+.input input{
+    
+    border-radius: 1rem;
+    width: 30rem;
+    font-size: 2rem;
+    border: none;
+    margin: 1rem 0;
+    margin-left: 3rem;
+    border: 1px black solid;
+    outline: none;
+}
+
+.input input:focus{
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid black;
+}
+.input label{
+    font-size: 1.5rem;
+    align-self: center;
+}

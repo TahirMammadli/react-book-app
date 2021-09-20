@@ -1,28 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Books.module.css";
 import Card from "../UI/Card";
+import { Fragment } from "react/cjs/react.production.min";
+import BookList from "./BookList/BookList";
 
 const Books = (props) => {
+  let booksPresent = props.booksPresent;
+  const messagePresent = props.messagePresent;
+ 
+
   const books = props.bookArr;
   return (
-    <div className={styles["books-flex"]}>
-      <Card>
-        <div className={styles.books}>
-          {books.map((book) => {
-            return (
-              <ul>
-                <li>{book.title}</li>
-                <li>{book.author}</li>
-                <li>{book.isbn}</li>
-                <li><button onClick={() => props.onDelete(book.id)}>Delete</button></li>
-                <li><button onClick={() => props.onEdit(book)}>Edit</button></li>
+    <Fragment>
+      <div className={styles['message-flex']}>
+      {messagePresent && <div className={styles.message}>Book edited!</div>}
 
-              </ul>
-            );
-          })}
-        </div>
-      </Card>
-    </div>
+      </div>
+      <div className={styles["books-flex"]}>
+
+        <Card>
+          <div className={styles.books}>
+            {booksPresent ? (
+              books.map((book) => {
+                return (
+                  <ul>
+                   
+                    <BookList book={book}/>
+                  </ul>
+                );
+              })
+            ) : (
+              <h1>No books found.</h1>
+            )}
+          </div>
+        </Card>
+      </div>
+    </Fragment>
   );
 };
 
